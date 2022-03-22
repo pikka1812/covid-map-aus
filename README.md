@@ -1,2 +1,2 @@
-# covid-map-aus
+# Australia Covid Map
  
