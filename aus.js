@@ -1,6 +1,6 @@
 import {ausStates} from "./aus-states.js";
 //setup the map
-const map = L.map('map').setView([-27,133], 5);
+const map = L.map('map').setView([-27,133], 4);
 map.setMaxBounds([[-10, 110], [-43.657607, 155]]);
 const info = L.control();
 const legend = L.control({position: 'bottomright'});
@@ -12,7 +12,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	subdomains: 'abcd',
 	maxZoom: 8,
-    minZoom: 5,
+    minZoom: 4,
 }).addTo(map);
 
 legend.onAdd = (map) => {

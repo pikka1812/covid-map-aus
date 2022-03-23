@@ -2,8 +2,10 @@ import {tasSuburbs} from "./tas-suburbs.js";
 for(let x of tasSuburbs.features) {
     x.properties.cases = Math.floor(Math.random() * 2000);
 }
-const map = L.map('tas-map').setView([-42.0,147], 8);
-map.setMaxBounds([[-39.206708, 149], [-43.657607, 144]]);
+
+window.alert("Since I don't have any offcial data about Tasmania covid cases, all the data on this page is \"fake\" and don't consider it as a offcial source")
+const map = L.map('tas-map').setView([-42.0,147], 7);
+map.setMaxBounds([[-39.206708, 149], [-44.657607, 143]]);
 const info = L.control();
 const legend = L.control({position: 'bottomright'});
 const button = L.control({position: 'bottomleft'});
@@ -16,7 +18,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	subdomains: 'abcd',
 	maxZoom: 20,
-    minZoom: 8
+    minZoom: 7
 }).addTo(map);
 
 legend.onAdd = (map) => {

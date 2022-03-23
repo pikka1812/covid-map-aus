@@ -3,7 +3,7 @@ body > * {
 }
 
 #map, #tas-map, .nearest-clinic {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .current-location {
@@ -40,4 +40,10 @@ body > * {
     float: left;
     margin-right: 8px;
     opacity: 0.7;
+}
+
+@media (max-width:576px){
+    #map, #tas-map {
+        min-height: 80vh;
+    }
 }
