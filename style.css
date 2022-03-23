@@ -1,8 +1,8 @@
-body { 
-    text-align: center  ;
+body > * { 
+    text-align: center;
 }
 
-#map {
+#map, #tas-map, .nearest-clinic {
     height: 100vh;
 }
 
