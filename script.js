@@ -6,6 +6,8 @@ class Clinic {
         this.openTime = openTime;
         this.note = note;
         this.coord = coord;
+        this.distance = null;
+        this.duration = null;
         this.url = url;
     }
 }
@@ -87,24 +89,34 @@ async function displayClinic(address) {
         };
 
         await service.getDistanceMatrix(request).then((response) => {
-            const distance = response.rows[0].elements[0].distance.text;
-            const duration = response.rows[0].elements[0].duration.text;
-
-            clinicsContainer.innerHTML+= `
-                <div class="row mt-5">
-                    <div class="col-sm-8" style="text-align: left;">
-                        <p class="h4 text-black">${x.name}</p>
-                        <p class="h5 text-primary">${x.address}</p>
-                        <p class="h6 text-secondary">${distance}   ||    ${duration}</p>
-                        <p>${x.condition}</p>
-                        <p>Open time: <b>${x.openTime}</b></p>
-                        <p style="font-style: italic;">Note: ${x.note}</p>
-                    </div>
-                    <div class="col-sm-4" style="text-align: right;">
-                        <a class="btn btn-outline-primary" href="https://covidtestbooking.health.tas.gov.au/">Register online</a>
-                        <a class="btn btn-outline-primary" href=${x.url}>Direction</a>
-                    </div>
-                </div>`
+            x.distance = response.rows[0].elements[0].distance.text;
+            x.duration = response.rows[0].elements[0].duration.text;
         })
     }
+
+    clinics.sort(compare);
+
+    for(let x of clinics) {
+        clinicsContainer.innerHTML+= `
+            <div class="row mt-5">
+                <div class="col-sm-8" style="text-align: left;">
+                    <p class="h4 text-black">${x.name}</p>
+                    <p class="h5 text-primary">${x.address}</p>
+                    <p class="h6 text-secondary">${x.distance}   ||    ${x.duration}</p>
+                    <p>${x.condition}</p>
+                    <p>Open time: <b>${x.openTime}</b></p>
+                    <p style="font-style: italic;">Note: ${x.note}</p>
+                </div>
+                <div class="col-sm-4" style="text-align: right;">
+                    <a class="btn btn-outline-primary" href="https://covidtestbooking.health.tas.gov.au/">Register online</a>
+                    <a class="btn btn-outline-primary" href=${x.url}>Direction</a>
+                </div>
+            </div>`
+    }
 };
+
+function compare( a, b ) {
+    if (+a.distance.slice(0,-3) < +b.distance.slice(0,-3))return -1;
+    if (+a.distance.slice(0,-3)> +b.distance.slice(0,-3))return 1;
+    return 0;
+}
